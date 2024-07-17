@@ -1,22 +1,48 @@
 using NaughtyAttributes;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
-public class PlayerAnimation : MonoBehaviour
+[RequireComponent(typeof(Animator)), RequireComponent(typeof(IMovement))]
+public class PlayerAnimation : MonoBehaviour, IAnimator
 {
-    [SerializeField] private SkinData[] availableSkins;
+    [SerializeField] private SkinData[] availableSkins; 
+    [Header("Internal")]
+    [SerializeField] private AnimationCurve rotationCurve;
 
+    private IMovement movementModule;
     private Animator animator;
     private SkinData currentSkin;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        movementModule = GetComponent<IMovement>();
     }
 
     private void Start()
     {
         SelectRandomSkin();
+    }
+
+    private void Update()
+    {
+        UpdateRotation();
+    }
+
+    private void UpdateRotation()
+    {
+        if(movementModule == null)
+        {
+            Debug.LogError("Movement module not found.");
+            return;
+        }
+
+        var speed = movementModule.GetSpeed();
+        var dot = Vector2.Dot(Vector2.down, speed);
+
+        var upDot = Mathf.Clamp(dot, -1, 1);
+
+
+        movementModule.SetRotation(upDot);
     }
 
     private void SelectRandomSkin()
