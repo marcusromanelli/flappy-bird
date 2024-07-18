@@ -1,5 +1,6 @@
 using AYellowpaper;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class GameController : MonoBehaviour, IGameController
@@ -8,14 +9,13 @@ public class GameController : MonoBehaviour, IGameController
     [SerializeField] private MonoBehaviour stagePrefab;
     [RequireInterface(typeof(IPlayer))]
     [SerializeField] private MonoBehaviour playerObject;
-    [SerializeField] private Button startButton;
+    [SerializeField] private GameObject startButton;
 
     private IStage stage;
     private IPlayer player;
+    private bool isRunning;
     private void Awake()
     {
-        startButton.onClick.AddListener(StartGame);
-
         player = (IPlayer)playerObject;
     }
     private void Start()
@@ -34,12 +34,21 @@ public class GameController : MonoBehaviour, IGameController
 
         stage.Setup();
     }
-    private void StartGame()
+    public void TouchScreen()
+    {
+        if (isRunning)
+            return;
+
+        StartGame();
+    }
+    public void StartGame()
     {
         startButton.gameObject.SetActive(false);
         stage.Run();
 
         player.Run();
+
+        isRunning = true;
     }
     public void AddScore()
     {
@@ -49,5 +58,7 @@ public class GameController : MonoBehaviour, IGameController
     {
         stage.Stop();
         player.Stop();
+
+        isRunning = false;
     }
 }

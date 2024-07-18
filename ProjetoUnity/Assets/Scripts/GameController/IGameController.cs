@@ -2,4 +2,5 @@ public interface IGameController
 {
     public void AddScore();
     public void Death();
+    public void TouchScreen();
 }

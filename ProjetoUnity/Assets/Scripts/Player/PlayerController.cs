@@ -78,7 +78,12 @@ public class PlayerController : MonoBehaviour, IPlayer
     }
     public void OnFlapInput(InputAction.CallbackContext context)
     {
-        if (!isRunning || !context.performed)
+        if (!context.performed)
+            return;
+
+        gameController.TouchScreen();
+
+        if (!isRunning)
             return;
 
         movementModule.Flap();
