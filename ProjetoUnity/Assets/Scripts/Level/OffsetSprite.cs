@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Renderer))]
-public class BackgroundMovement : MonoBehaviour
+public class OffsetSprite : MonoBehaviour
 {
     [SerializeField] private float speed;
 
