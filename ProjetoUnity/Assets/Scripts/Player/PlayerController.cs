@@ -1,11 +1,11 @@
-using AYellowpaper;
-using System.Collections;
-using System.Collections.Generic;
+using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody2D)), RequireComponent(typeof(IMovement)), RequireComponent(typeof(IAnimator))]
 public class PlayerController : MonoBehaviour, IPlayer
 {
+    [SerializeField]
     private IMovement movementModule;
     private IAnimator animatorModule;
     private bool isRunning;
@@ -43,20 +43,8 @@ public class PlayerController : MonoBehaviour, IPlayer
     {
         this.gameController = gameController;
     }
-    public void Run()
-    {
-        isRunning = true;
-        EnableInput();
-        EnableGravity();
-    }
-    public void Stop()
-    {
-        isRunning = false;
-        DisableInput();
-    }
     private void SetTutorial()
     {
-        DisableInput();
         DisableGravity();
     }
     private void DisableGravity()
@@ -67,21 +55,6 @@ public class PlayerController : MonoBehaviour, IPlayer
     {
         rigidbody.gravityScale = 1f;
     }
-    private void DisableInput()
-    {
-        (movementModule).Stop();
-    }
-
-    private void EnableInput()
-    {
-        (movementModule).Run();
-    }
-
-    public void OnCollisionEnter2D(Collision2D collision)
-    {     
-        HandleCollision(collision);
-    }
-
     private void HandleCollision(Collision2D collision)
     {
         if (collision.gameObject.layer == scoreLayer)
@@ -95,7 +68,6 @@ public class PlayerController : MonoBehaviour, IPlayer
             return;
         }
     }
-
     private void HandleScore()
     {
         gameController.AddScore();
@@ -103,5 +75,26 @@ public class PlayerController : MonoBehaviour, IPlayer
     private void HandeDeath()
     {
         gameController.Death();
+    }
+    public void OnFlapInput(InputAction.CallbackContext context)
+    {
+        if (!isRunning || !context.performed)
+            return;
+
+        movementModule.Flap();
+    }
+    [Button("Enable")]
+    public void Run()
+    {
+        isRunning = true;
+        EnableGravity();
+    }
+    public void Stop()
+    {
+        isRunning = false;
+    }
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        HandleCollision(collision);
     }
 }

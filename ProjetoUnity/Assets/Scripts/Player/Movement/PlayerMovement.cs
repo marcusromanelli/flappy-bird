@@ -10,7 +10,6 @@ public class PlayerMovement : MonoBehaviour, IMovement
 
     new private Rigidbody2D rigidbody2D;
     private Vector3 rotationTarget;
-    private bool isRunning;
 
     private void Awake()
     {
@@ -19,7 +18,6 @@ public class PlayerMovement : MonoBehaviour, IMovement
 
     private void Update()
     {
-        CheckTap();
         Rotate();
     }
 
@@ -27,19 +25,6 @@ public class PlayerMovement : MonoBehaviour, IMovement
     {
         transform.localRotation = Quaternion.RotateTowards(transform.localRotation, Quaternion.Euler(rotationTarget), rotationSpeed * Time.deltaTime);
     }
-    private void CheckTap()
-    {
-        if (!isRunning)
-            return;
-
-        if (!Input.GetMouseButtonDown(0))
-            return;
-
-        var force = -rigidbody2D.velocity + Vector2.up * upForce; //400 is ok
-        
-        rigidbody2D.AddForce(force);
-    }
-
     public Vector2 GetSpeed()
     {
         return rigidbody2D.velocity;
@@ -61,13 +46,10 @@ public class PlayerMovement : MonoBehaviour, IMovement
         rotationTarget = myRotation;
     }
 
-    public void Run()
+    public void Flap()
     {
-        isRunning = true;
-    }
+        var force = -rigidbody2D.velocity + Vector2.up * upForce; //400 is ok
 
-    public void Stop()
-    {
-        isRunning = false;
+        rigidbody2D.AddForce(force);
     }
 }
