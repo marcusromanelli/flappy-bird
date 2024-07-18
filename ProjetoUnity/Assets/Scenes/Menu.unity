@@ -286,6 +286,7 @@ GameObject:
   m_Component:
   - component: {fileID: 446106707}
   - component: {fileID: 446106706}
+  - component: {fileID: 446106708}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -309,6 +310,7 @@ MonoBehaviour:
   playerObject: {fileID: 1366919403}
   pointCounterControllerObject: {fileID: 571161398}
   gameOverControllerObject: {fileID: 1949050065}
+  scoreControllerObject: {fileID: 446106708}
   startButton: {fileID: 585877123}
 --- !u!4 &446106707
 Transform:
@@ -325,6 +327,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &446106708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 446106705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f214690bd8f259429b61ab0d9b311b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  medals:
+  - {fileID: 11400000, guid: 4a598cfe84c71274ebc7d02cf41df085, type: 2}
+  - {fileID: 11400000, guid: cc774e1ca3b9bbf469485627703fca10, type: 2}
+  - {fileID: 11400000, guid: 9da325d2309844648b9de7f269488b44, type: 2}
+  - {fileID: 11400000, guid: ac18e8a68f5d3f24182a769e41654ea1, type: 2}
 --- !u!1 &514138911
 GameObject:
   m_ObjectHideFlags: 0

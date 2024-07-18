@@ -17,24 +17,28 @@ public class GameController : MonoBehaviour, IGameController
     [SerializeField] private MonoBehaviour stagePrefab;
     [RequireInterface(typeof(IPlayer))]
     [SerializeField] private MonoBehaviour playerObject;
-    [RequireInterface(typeof(IScoreCounterController))]
+    [RequireInterface(typeof(IScoreWindowController))]
     [SerializeField] private MonoBehaviour pointCounterControllerObject;
     [RequireInterface(typeof(IGameOverController))]
     [SerializeField] private MonoBehaviour gameOverControllerObject;
+    [RequireInterface(typeof(IScoreController))]
+    [SerializeField] private MonoBehaviour scoreControllerObject;
 
     [SerializeField] private GameObject startButton;
 
     private IStage stage;
     private IPlayer player;
-    private IScoreCounterController scoreController;
+    private IScoreWindowController scoreWindowController;
     private IGameOverController gameOverController;
+    private IScoreController scoreController;
     private int currentScore;
     private GameState gameState;
     private void Awake()
     {
         player = (IPlayer)playerObject;
-        scoreController = (IScoreCounterController)pointCounterControllerObject;
+        scoreWindowController = (IScoreWindowController)pointCounterControllerObject;
         gameOverController = (IGameOverController)gameOverControllerObject;
+        scoreController = (IScoreController)scoreControllerObject;
     }
     private void Start()
     {
@@ -67,11 +71,25 @@ public class GameController : MonoBehaviour, IGameController
     }
     private void RefreshScore()
     {
-        scoreController.SetPoint(currentScore);
+        scoreWindowController.SetPoint(currentScore);
     }
     private void ResetGame()
     {
         SceneManager.LoadScene(0);
+    }
+    private void ShowGameOverScreen()
+    {
+        Sprite medal = null;
+        var medalData = scoreController.GetMedal(currentScore);
+
+        if (medalData != null)
+            medal = medalData.medalSprite;
+
+        scoreController.Store(currentScore);
+
+        gameOverController.Setup(currentScore, scoreController.GetHighestScore(), medal, ResetGame);
+        gameOverController.Show();
+
     }
     public void TouchScreen()
     {
@@ -100,7 +118,6 @@ public class GameController : MonoBehaviour, IGameController
 
         gameState = GameState.Death;
 
-        gameOverController.Setup(currentScore, 999, null, ResetGame);
-        gameOverController.Show();
+        ShowGameOverScreen();
     }
 }
