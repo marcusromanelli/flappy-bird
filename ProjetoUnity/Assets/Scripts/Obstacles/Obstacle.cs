@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Obstacle : MonoBehaviour, IPoolable
+public class Obstacle : MonoBehaviour, IPoolable, IStartable
 {
     [SerializeField] public UnityEvent<Obstacle> onLeftScreen;
     [SerializeField] private float spaceBetween;
@@ -34,6 +34,11 @@ public class Obstacle : MonoBehaviour, IPoolable
 
     public void OnEnabled()
     {
+        EnableAndRun();
+    }
+
+    private void EnableAndRun()
+    {
         isRunning = true;
         gameObject.SetActive(true);
     }
@@ -50,16 +55,15 @@ public class Obstacle : MonoBehaviour, IPoolable
 
     private void Reset()
     {
-        onLeftScreen.RemoveAllListeners();
-        isRunning = false;
+        Stop();
         gameObject.SetActive(false);
     }
     private void Update()
     {
-        Run();
+        CheckPosition();
     }
 
-    private void Run()
+    private void CheckPosition()
     {
         if (!isRunning)
             return;
@@ -82,5 +86,16 @@ public class Obstacle : MonoBehaviour, IPoolable
             return;
         
         onLeftScreen?.Invoke(this);
+    }
+
+    public void Run()
+    {
+        EnableAndRun();
+    }
+
+    public void Stop()
+    {
+        onLeftScreen.RemoveAllListeners();
+        isRunning = false;
     }
 }

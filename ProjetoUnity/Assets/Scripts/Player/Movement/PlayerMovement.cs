@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour, IMovement
 
     new private Rigidbody2D rigidbody2D;
     private Vector3 rotationTarget;
+    private bool isRunning;
 
     private void Awake()
     {
@@ -28,6 +29,9 @@ public class PlayerMovement : MonoBehaviour, IMovement
     }
     private void CheckTap()
     {
+        if (!isRunning)
+            return;
+
         if (!Input.GetMouseButtonDown(0))
             return;
 
@@ -55,5 +59,15 @@ public class PlayerMovement : MonoBehaviour, IMovement
         myRotation.z = Mathf.Lerp(rotationRange.x, rotationRange.y, rotation);
 
         rotationTarget = myRotation;
+    }
+
+    public void Run()
+    {
+        isRunning = true;
+    }
+
+    public void Stop()
+    {
+        isRunning = false;
     }
 }

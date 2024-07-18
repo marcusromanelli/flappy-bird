@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Renderer))]
-public class OffsetSprite : MonoBehaviour
+public class OffsetSprite : MonoBehaviour, IStartable
 {
     [SerializeField] private float speed;
 
@@ -9,6 +9,17 @@ public class OffsetSprite : MonoBehaviour
     private Vector2 offset;
     private MaterialPropertyBlock propertyBlock;
     new private Renderer renderer;
+    private bool isRunning;
+
+    public void Run()
+    {
+        isRunning = true;
+    }
+
+    public void Stop()
+    {
+        isRunning = false;
+    }
 
     private void Awake()
     {
@@ -22,6 +33,9 @@ public class OffsetSprite : MonoBehaviour
 
     private void UpdateTiling()
     {
+        if (!isRunning)
+            return;
+
         offset.x += speed * Time.deltaTime;
 
         if (offset.x >= 1)
