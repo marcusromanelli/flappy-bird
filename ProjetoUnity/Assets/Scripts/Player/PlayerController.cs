@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D)), RequireComponent(typeof(IMovement)), RequireComponent(typeof(IAnimator))]
 public class PlayerController : MonoBehaviour, IPlayer
 {
-    [SerializeField]
     private IMovement movementModule;
     private IAnimator animatorModule;
     private bool isRunning;
