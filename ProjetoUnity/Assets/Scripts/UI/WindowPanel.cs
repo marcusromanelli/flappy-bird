@@ -5,18 +5,18 @@ public abstract class WindowPanel : MonoBehaviour, IWindow
 {
     CanvasGroup canvasGroup;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
     }
-    public void Hide()
+    public virtual void Hide()
     {
         canvasGroup.alpha = 0;
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;
     }
 
-    public void Show()
+    public virtual void Show()
     {
         canvasGroup.alpha = 1;
         canvasGroup.interactable = true;

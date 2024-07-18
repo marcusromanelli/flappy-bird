@@ -14,12 +14,12 @@ public abstract class WindowController<T> : MonoBehaviour where T: IWindow
         window = windowObject.GetComponent<T>();
     }
 
-    public void Show()
+    public virtual void Show()
     {
         window.Show();
     }
 
-    public void Hide()
+    public virtual void Hide()
     {
         window.Hide();
     }

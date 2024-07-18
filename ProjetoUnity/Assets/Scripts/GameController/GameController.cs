@@ -1,6 +1,8 @@
 using AYellowpaper;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameController : MonoBehaviour, IGameController
@@ -17,18 +19,22 @@ public class GameController : MonoBehaviour, IGameController
     [SerializeField] private MonoBehaviour playerObject;
     [RequireInterface(typeof(IScoreCounterController))]
     [SerializeField] private MonoBehaviour pointCounterControllerObject;
+    [RequireInterface(typeof(IGameOverController))]
+    [SerializeField] private MonoBehaviour gameOverControllerObject;
 
     [SerializeField] private GameObject startButton;
 
     private IStage stage;
     private IPlayer player;
     private IScoreCounterController scoreController;
+    private IGameOverController gameOverController;
     private int currentScore;
     private GameState gameState;
     private void Awake()
     {
         player = (IPlayer)playerObject;
         scoreController = (IScoreCounterController)pointCounterControllerObject;
+        gameOverController = (IGameOverController)gameOverControllerObject;
     }
     private void Start()
     {
@@ -63,6 +69,10 @@ public class GameController : MonoBehaviour, IGameController
     {
         scoreController.SetPoint(currentScore);
     }
+    private void ResetGame()
+    {
+        SceneManager.LoadScene(0);
+    }
     public void TouchScreen()
     {
         if (gameState != GameState.Tutorial)
@@ -89,5 +99,8 @@ public class GameController : MonoBehaviour, IGameController
         player.Stop();
 
         gameState = GameState.Death;
+
+        gameOverController.Setup(currentScore, 999, null, ResetGame);
+        gameOverController.Show();
     }
 }
