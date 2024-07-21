@@ -1,11 +1,12 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Obstacle : MonoBehaviour, IPoolable, IStartable
+public class Obstacle : MonoBehaviour, IPoolable, IStartable, IObstacle
 {
     [SerializeField] public UnityEvent<Obstacle> onLeftScreen;
-    [SerializeField] private float spaceBetween;
-    [SerializeField] private float maxDistanceFromStart;
+    [SerializeField] private float spaceBetweenPipes;
+    [SerializeField] private float distanceToLeaveScreen;
+    [SerializeField] private float maxVerticalDistanceFromCenter;
     [SerializeField] private Vector3 speed;
     [SerializeField] private Sprite sprite;
     [SerializeField] private SpriteRenderer topObject;
@@ -19,7 +20,8 @@ public class Obstacle : MonoBehaviour, IPoolable, IStartable
         topObject.sprite = sprite;
         bottomObject.sprite = sprite;
 
-        var half = spaceBetween / 2;
+
+        var half = spaceBetweenPipes / 2;
         topObject.transform.localPosition = new Vector3 (0, half, 0);
         bottomObject.transform.localPosition = new Vector3 (0, -half, 0);
     }
@@ -28,16 +30,30 @@ public class Obstacle : MonoBehaviour, IPoolable, IStartable
     {
         startPosition = transform.position;
     }
+    public void Setup(Vector3 startPosition)
+    {
+        this.startPosition = startPosition;
+        transform.position = startPosition;
+
+        RandomizeVerticalPosition();
+    }
 
     public void OnEnabled()
     {
         EnableAndRun();
     }
+    private void RandomizeVerticalPosition()
+    {
+        var verticalPosition = Random.Range(-maxVerticalDistanceFromCenter, maxVerticalDistanceFromCenter);
 
+        transform.position = new Vector3(transform.position.x, verticalPosition, transform.position.z);
+    }
     private void EnableAndRun()
     {
         isRunning = true;
         gameObject.SetActive(true);
+
+        RandomizeVerticalPosition();
     }
 
     public void OnDisabled()
@@ -71,7 +87,7 @@ public class Obstacle : MonoBehaviour, IPoolable, IStartable
 
         transform.position = nextPosition;
 
-        if((transform.position - startPosition).magnitude >= maxDistanceFromStart)
+        if((transform.position - startPosition).magnitude >= distanceToLeaveScreen)
             HandleLeftScreen();
     }
 

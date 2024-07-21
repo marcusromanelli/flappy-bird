@@ -5,7 +5,8 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D)), RequireComponent(typeof(IMovement)), RequireComponent(typeof(IAnimator))]
 public class PlayerController : MonoBehaviour, IPlayer
 {
-    [SerializeField, OnValueChanged("OnchangeDisabledCallback")] private bool Disabled;
+    [SerializeField, OnValueChanged("OnChangeDisabledCallback")] private bool DisableInput;
+    [SerializeField] private bool DisableCollision;
 
 
     private IMovement movementModule;
@@ -33,11 +34,11 @@ public class PlayerController : MonoBehaviour, IPlayer
         obstacleLayer = LayerMask.NameToLayer("Obstacle");
         scoreLayer = LayerMask.NameToLayer("ObstacleScore");
     }
-    private void OnchangeDisabledCallback()
+    private void OnChangeDisabledCallback()
     {
         Init(); //Puting these here because Disabled can be set in editor
 
-        rigidbody.bodyType = Disabled ? RigidbodyType2D.Kinematic : RigidbodyType2D.Dynamic;
+        rigidbody.bodyType = DisableCollision ? RigidbodyType2D.Kinematic : RigidbodyType2D.Dynamic;
     }
     private void UpdateRotation()
     {
@@ -69,6 +70,9 @@ public class PlayerController : MonoBehaviour, IPlayer
     }
     private void HandleCollision(Collision2D collision)
     {
+        if (DisableCollision)
+            return;
+
         if (collision.gameObject.layer == scoreLayer)
         {
             HandleScore();
