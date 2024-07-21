@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour, IGameController
         Death
     }
     [RequireInterface(typeof(IStage))]
-    [SerializeField] private MonoBehaviour stagePrefab;
+    [SerializeField] private MonoBehaviour[] stagePrefabs;
     [RequireInterface(typeof(IPlayer))]
     [SerializeField] private MonoBehaviour playerObject;
     [RequireInterface(typeof(IScoreCounterController))]
@@ -54,9 +54,16 @@ public class GameController : MonoBehaviour, IGameController
     {
         player.Setup(this);
     }
+
+    MonoBehaviour SelectRandomStage()
+    {
+        return stagePrefabs[Random.Range(0, stagePrefabs.Length)];
+    }
     private void InstantiateStage()
     {
-        stage = Instantiate(stagePrefab, transform).GetComponent<IStage>();
+        var randomStage = SelectRandomStage();
+
+        stage = Instantiate(randomStage, transform).GetComponent<IStage>();
 
         stage.Setup();
     }

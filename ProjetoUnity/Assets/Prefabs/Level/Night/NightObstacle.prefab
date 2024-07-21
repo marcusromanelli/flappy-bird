@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: fdef6ab3bfb105749beb0393c975e4c0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b35ef9334fa6bca4e9f238c9de700e7c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -119,8 +119,8 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -3.58}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0.40625}
-    pivot: {x: 0.49218562, y: 0.99650794}
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 0.8125, y: 5}
     newSize: {x: 0.81, y: 7.168342}
     adaptiveTilingThreshold: 0.5
@@ -142,7 +142,7 @@ GameObject:
   - component: {fileID: 3114220778665099574}
   - component: {fileID: 8442204259204170009}
   m_Layer: 7
-  m_Name: Obstacle
+  m_Name: NightObstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -184,7 +184,7 @@ MonoBehaviour:
   distanceToLeaveScreen: 15
   maxVerticalDistanceFromCenter: 3
   speed: {x: -3, y: 0, z: 0}
-  sprite: {fileID: 21300000, guid: fdef6ab3bfb105749beb0393c975e4c0, type: 3}
+  sprite: {fileID: 21300000, guid: b35ef9334fa6bca4e9f238c9de700e7c, type: 3}
   topObject: {fileID: 7744845813001421673}
   bottomObject: {fileID: 6444947132715655878}
 --- !u!61 &8442204259204170009
@@ -306,7 +306,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: fdef6ab3bfb105749beb0393c975e4c0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b35ef9334fa6bca4e9f238c9de700e7c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -351,8 +351,8 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -3.58}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0.40625}
-    pivot: {x: 0.49218562, y: 0.99650794}
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 0.8125, y: 5}
     newSize: {x: 0.81, y: 7.168342}
     adaptiveTilingThreshold: 0.5

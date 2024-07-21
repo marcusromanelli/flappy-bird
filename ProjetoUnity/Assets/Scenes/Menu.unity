@@ -305,7 +305,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aa458861d7fa1345b1abbae974de970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stagePrefab: {fileID: 4798147306603692205, guid: 17f6039df79083a489f2fcd0733c5dba, type: 3}
+  stagePrefabs:
+  - {fileID: 4798147306603692205, guid: 17f6039df79083a489f2fcd0733c5dba, type: 3}
+  - {fileID: 4798147306603692205, guid: 3e69a160877cda84fa5492838462fc86, type: 3}
   playerObject: {fileID: 1366919403}
   pointCounterControllerObject: {fileID: 571161398}
   gameOverControllerObject: {fileID: 1949050065}
