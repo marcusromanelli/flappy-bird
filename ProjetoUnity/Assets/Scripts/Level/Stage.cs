@@ -41,6 +41,7 @@ public class Stage : MonoBehaviour, IStage, IStartable
 
         var obstacle = obstaclePool.Get();
         obstacle.transform.position = spawnPoint.position;
+        obstacle.Setup();
 
         runningObstacles.Add(obstacle);
         obstacle.onLeftScreen.AddListener(OnObstacleLeftScreen);

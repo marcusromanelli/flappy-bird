@@ -5,18 +5,15 @@ public class Obstacle : MonoBehaviour, IPoolable, IStartable
 {
     [SerializeField] public UnityEvent<Obstacle> onLeftScreen;
     [SerializeField] private float spaceBetween;
+    [SerializeField] private float maxDistanceFromStart;
     [SerializeField] private Vector3 speed;
     [SerializeField] private Sprite sprite;
     [SerializeField] private SpriteRenderer topObject;
     [SerializeField] private SpriteRenderer bottomObject;
 
-    private int endPointLayer;
     private bool isRunning;
+    private Vector3 startPosition;
 
-    private void Awake()
-    {
-        endPointLayer = LayerMask.NameToLayer("EndPoint"); //Placeholder
-    }
     private void Start()
     {
         topObject.sprite = sprite;
@@ -29,7 +26,7 @@ public class Obstacle : MonoBehaviour, IPoolable, IStartable
 
     public void Setup()
     {
-        
+        startPosition = transform.position;
     }
 
     public void OnEnabled()
@@ -73,18 +70,13 @@ public class Obstacle : MonoBehaviour, IPoolable, IStartable
         nextPosition += speed * Time.deltaTime;
 
         transform.position = nextPosition;
+
+        if((transform.position - startPosition).magnitude >= maxDistanceFromStart)
+            HandleLeftScreen();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        HandleCollision(collision);
-    }
-
-    private void HandleCollision(Collider2D collision)
-    {
-        if (!isRunning || collision.gameObject.layer != endPointLayer)
-            return;
-        
+    private void HandleLeftScreen()
+    {        
         onLeftScreen?.Invoke(this);
     }
 

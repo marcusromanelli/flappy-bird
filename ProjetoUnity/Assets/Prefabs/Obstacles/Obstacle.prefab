@@ -181,6 +181,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   spaceBetween: 2.5
+  maxDistanceFromStart: 20
   speed: {x: -3, y: 0, z: 0}
   sprite: {fileID: 21300000, guid: fdef6ab3bfb105749beb0393c975e4c0, type: 3}
   topObject: {fileID: 7744845813001421673}

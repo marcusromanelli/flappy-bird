@@ -5,6 +5,9 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D)), RequireComponent(typeof(IMovement)), RequireComponent(typeof(IAnimator))]
 public class PlayerController : MonoBehaviour, IPlayer
 {
+    [SerializeField, OnValueChanged("OnchangeDisabledCallback")] private bool Disabled;
+
+
     private IMovement movementModule;
     private IAnimator animatorModule;
     private bool isRunning;
@@ -14,17 +17,27 @@ public class PlayerController : MonoBehaviour, IPlayer
 
     private void Awake()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
-        movementModule = GetComponent<IMovement>();
-        animatorModule = GetComponent<IAnimator>();
-        obstacleLayer = LayerMask.NameToLayer("Obstacle");
-        scoreLayer = LayerMask.NameToLayer("ObstacleScore");
+        Init();
 
         SetTutorial();
     }
     private void Update()
     {
         UpdateRotation();
+    }
+    private void Init()
+    {
+        rigidbody = GetComponent<Rigidbody2D>();
+        movementModule = GetComponent<IMovement>();
+        animatorModule = GetComponent<IAnimator>();
+        obstacleLayer = LayerMask.NameToLayer("Obstacle");
+        scoreLayer = LayerMask.NameToLayer("ObstacleScore");
+    }
+    private void OnchangeDisabledCallback()
+    {
+        Init(); //Puting these here because Disabled can be set in editor
+
+        rigidbody.bodyType = Disabled ? RigidbodyType2D.Kinematic : RigidbodyType2D.Dynamic;
     }
     private void UpdateRotation()
     {
