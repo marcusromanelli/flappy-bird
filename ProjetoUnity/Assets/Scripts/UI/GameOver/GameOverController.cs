@@ -1,18 +1,18 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class GameOverController : WindowController<IGameOverWindow>, IGameOverController
 {
     private Action onClickRestart;
-
-    public void Setup(int currentScore, int maxScore, Sprite medal, Action onClickRestart)
+    private int highscore;
+    public void Setup(int currentScore, int highscore, Sprite medal, Action onClickRestart)
     {
         this.onClickRestart = onClickRestart;
+        this.highscore = highscore;
 
         window.Setup(OnClickRestart);
-        window.SetMaxScore(maxScore);
+        window.SetMaxScore(highscore);
         window.SetCurrentScore(currentScore);
 
         StartCoroutine(CountScore(medal, currentScore));
@@ -24,13 +24,17 @@ public class GameOverController : WindowController<IGameOverWindow>, IGameOverCo
     private IEnumerator CountScore(Sprite medal, int currentScore)
     {
         var i = 0;
+        var increaseBy = currentScore / 5;
         while(i <= currentScore)
         {
             window.SetCurrentScore(i);
-            i++;
-            yield return null;
+            i+= increaseBy;
+            yield return new WaitForSeconds(0.1f);
         }
 
         window.SetMedal(medal);
+
+        if (currentScore >= highscore)
+            window.SetNewScore();
     }
 }
