@@ -18,3 +18,7 @@ MonoBehaviour:
   obstaclePrefab: {fileID: 3114220778665099574, guid: a1c861b6dd82bca4a9763b770abce410, type: 3}
   screenflashData: {fileID: 11400000, guid: d0559974d7b8e414f80cb798a0e43ce2, type: 2}
   soundData: {fileID: 11400000, guid: 25057d6960a5f764083c21f7fdd1d9ac, type: 2}
+  availableSkins:
+  - {fileID: 11400000, guid: 8cfb537ca34746745985267d82dc9444, type: 2}
+  - {fileID: 11400000, guid: ee8405c4339ed7b4fb539b5f63c6db26, type: 2}
+  - {fileID: 11400000, guid: cd42e5a3414235b438fa0c3e30cd71c6, type: 2}

@@ -325,6 +325,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GenericStage
       objectReference: {fileID: 0}
+    - target: {fileID: 7083007080274044733, guid: be5c85e7fe3c5e5498719f9c1ecc82da, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -455,6 +459,7 @@ MonoBehaviour:
   stagePrefabs:
   - {fileID: 11400000, guid: d727035c7498b0b499b9fd04a9cdaba4, type: 2}
   - {fileID: 11400000, guid: 2a8e1463bbf9d024d8e8b4023173b985, type: 2}
+  - {fileID: 11400000, guid: 7ce957b8952eb8140a677ff823e1f31c, type: 2}
   playerObject: {fileID: 1366919403}
   pointCounterControllerObject: {fileID: 571161398}
   gameOverControllerObject: {fileID: 1949050065}
@@ -2198,10 +2203,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fe73f9bad1068a4f926526fc95238a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  availableSkins:
-  - {fileID: 11400000, guid: 8cfb537ca34746745985267d82dc9444, type: 2}
-  - {fileID: 11400000, guid: ee8405c4339ed7b4fb539b5f63c6db26, type: 2}
-  - {fileID: 11400000, guid: cd42e5a3414235b438fa0c3e30cd71c6, type: 2}
 --- !u!50 &1366919400
 Rigidbody2D:
   serializedVersion: 4
