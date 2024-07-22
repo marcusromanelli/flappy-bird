@@ -230,8 +230,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1682752699}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.446, y: 0.15884337}
-  m_AnchorMax: {x: 0.6123331, y: 0.3393807}
+  m_AnchorMin: {x: 0.5424487, y: 0.3393807}
+  m_AnchorMax: {x: 0.7084037, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -758,10 +758,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1682752699}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.62100005, y: 0.7468434}
+  m_AnchorMin: {x: 0.7084037, y: 0.7468434}
   m_AnchorMax: {x: 0.93574995, y: 0.91085064}
-  m_AnchoredPosition: {x: 2.5, y: 0}
-  m_SizeDelta: {x: -9, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &539477225
 MonoBehaviour:
@@ -892,7 +892,7 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1682752699}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.62100005, y: 0.3393807}
+  m_AnchorMin: {x: 0.7084037, y: 0.3393807}
   m_AnchorMax: {x: 0.93574995, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
@@ -1141,7 +1141,7 @@ GameObject:
   - component: {fileID: 571161397}
   - component: {fileID: 571161396}
   m_Layer: 5
-  m_Name: PointCounter
+  m_Name: ScoreCounter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
