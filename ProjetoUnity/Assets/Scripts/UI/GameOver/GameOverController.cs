@@ -13,7 +13,6 @@ public class GameOverController : WindowController<IGameOverWindow>, IGameOverCo
 
         window.Setup(OnClickRestart);
         window.SetMaxScore(highscore);
-        window.SetCurrentScore(currentScore);
 
         StartCoroutine(CountScore(medal, currentScore));
     }
@@ -24,7 +23,10 @@ public class GameOverController : WindowController<IGameOverWindow>, IGameOverCo
     private IEnumerator CountScore(Sprite medal, int currentScore)
     {
         var i = 0;
-        var increaseBy = Mathf.CeilToInt(currentScore / 5f);
+        var increaseBy = Mathf.CeilToInt(currentScore / 10f);
+
+        yield return new WaitForSeconds(1);
+
         while(i <= currentScore)
         {
             window.SetCurrentScore(i);
