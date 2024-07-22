@@ -35,6 +35,6 @@ public class ScoreController : MonoBehaviour, IScoreController
         if (score > highestScore) 
             highestScore = score;
 
-        PlayerPrefs.GetInt(storeKey, highestScore);
+        PlayerPrefs.SetInt(storeKey, highestScore);
     }
 }
