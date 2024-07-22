@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a0a2354d41445a4884e37d39034b758, type: 3}
+  m_Name: DefaultSoundData
+  m_EditorClassIdentifier: 
+  BGM: {fileID: 8300000, guid: 1fcab1a8afc78c74696c1e06e9844bc6, type: 3}
+  Die: {fileID: 8300000, guid: de246811619c34f40aacbd51c24619a1, type: 3}
+  Score: {fileID: 8300000, guid: 67e6e0af94e76db4d856a3e6db3b0079, type: 3}
+  Flap: {fileID: 8300000, guid: 506e5f948ec764546a52746bc6724b0a, type: 3}

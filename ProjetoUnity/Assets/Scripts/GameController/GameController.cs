@@ -5,11 +5,7 @@ using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour, IGameController
-{
-    public UnityEvent OnPlayerDie;
-    public UnityEvent OnGameStart;
-    public UnityEvent OnPlayerScore;
-    
+{    
     enum GameState
     {
         Tutorial,
@@ -31,6 +27,8 @@ public class GameController : MonoBehaviour, IGameController
     [SerializeField] private MonoBehaviour screenflasherObject;
     [RequireInterface(typeof(IStartWindowController))]
     [SerializeField] private MonoBehaviour startObject;
+    [RequireInterface(typeof(ISoundController))]
+    [SerializeField] private MonoBehaviour soundObject;
     [SerializeField] private GameObject startButton;
 
 #if UNITY_EDITOR
@@ -47,6 +45,7 @@ public class GameController : MonoBehaviour, IGameController
     private IScoreController scoreController;
     private IScreenflasherController screenflasherController;
     private IStartWindowController startController;
+    private ISoundController soundController;
     private int currentScore;
     private GameState gameState;
     private void Awake()
@@ -57,6 +56,7 @@ public class GameController : MonoBehaviour, IGameController
         scoreController = (IScoreController)scoreControllerObject;
         screenflasherController = (IScreenflasherController)screenflasherObject;
         startController = (IStartWindowController)startObject;
+        soundController = (ISoundController)soundObject;
         stage = (IStage)stageObject;
     }
     private void Start()
@@ -89,6 +89,8 @@ public class GameController : MonoBehaviour, IGameController
         var randomStage = SelectRandomStage();
 
         var stageData = Instantiate(randomStage, transform);
+
+        soundController.Setup(stageData.soundData);
 
         stage.Setup(stageData);
     }
@@ -133,10 +135,18 @@ public class GameController : MonoBehaviour, IGameController
     }
     public void TouchScreen()
     {
-        if (gameState != GameState.Tutorial)
-            return;
-
-        StartGame();
+        switch (gameState)
+        {
+            case GameState.Tutorial:
+                StartGame();
+                soundController.PlayFlap();
+                break;
+            case GameState.Playing:
+                soundController.PlayFlap();
+                break;
+            default:
+                break;
+        }
     }
     public void StartGame()
     {
@@ -151,6 +161,8 @@ public class GameController : MonoBehaviour, IGameController
     }
     public void AddScore()
     {
+        soundController.PlayerScored();
+
         SetScore(++currentScore);
     }
     public void Death()
@@ -164,5 +176,7 @@ public class GameController : MonoBehaviour, IGameController
         gameState = GameState.Death;
 
         ShowScreenFlash();
+
+        soundController.PlayDied();
     }
 }
