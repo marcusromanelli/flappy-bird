@@ -135,6 +135,9 @@ public class GameController : MonoBehaviour, IGameController
     }
     public void Death()
     {
+        if (gameState != GameState.Playing)
+            return;
+
         stage.Stop();
         player.Stop();
 
