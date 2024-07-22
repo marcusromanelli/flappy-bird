@@ -4,18 +4,13 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class PlayerAnimation : MonoBehaviour, IAnimator
 {
-    [SerializeField] private SkinData[] availableSkins;
-
+    private SkinData[] availableSkins;
     private Animator animator;
     private SkinData currentSkin;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
-    }
-    private void Start()
-    {
-        SelectRandomSkin();
     }
     private void SelectRandomSkin()
     {
@@ -25,9 +20,19 @@ public class PlayerAnimation : MonoBehaviour, IAnimator
 
         SelectSkin(randomNumber);
     }
+    public void Setup(SkinData[] skinData)
+    {
+        availableSkins = skinData;
+
+        SelectRandomSkin();
+    }
+    private SkinData GetSkin(int skinIndex)
+    {
+        return availableSkins[skinIndex];
+    }
     private void SelectSkin(int skinIndex)
     {
-        if(currentSkin != null)
+        if (currentSkin != null)
         {
             animator.SetLayerWeight(currentSkin.LayerIndex, 0);
         }
@@ -38,20 +43,5 @@ public class PlayerAnimation : MonoBehaviour, IAnimator
 
         animator.SetLayerWeight(skin.LayerIndex, 1);
     }
-    private SkinData GetSkin(int skinIndex)
-    {
-        return availableSkins[skinIndex];
-    }
-    [Button("Next Random Skin")]
-    private void GoToNextRandomSkin()
-    {
-        SelectRandomSkin();
-    }
-    public void SetSkin(int skinIndex)
-    {
-        if (skinIndex < 0 || skinIndex > availableSkins.Length)
-            return;
 
-        SetSkin(skinIndex);
-    }
 }

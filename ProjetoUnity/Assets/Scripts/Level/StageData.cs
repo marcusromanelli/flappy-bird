@@ -9,4 +9,5 @@ public class StageData : ScriptableObject
     [SerializeField] public Obstacle obstaclePrefab;
     [SerializeField] public ScreenflashData screenflashData;
     [SerializeField] public SoundData soundData;
+    [SerializeField] public SkinData[] availableSkins;
 }

@@ -77,7 +77,7 @@ public class GameController : MonoBehaviour, IGameController
     }
     private void InitializePlayer()
     {
-        player.Setup(this);
+        player.Setup(this, stage.GetStageData().availableSkins);
     }
 
     StageData SelectRandomStage()
@@ -109,7 +109,7 @@ public class GameController : MonoBehaviour, IGameController
     }
     private void ShowScreenFlash()
     {
-        var data = stage.GetScreenflashData();
+        var data = stage.GetStageData().screenflashData;
         screenflasherController.Show(data.color, data.time, () => {
             ShowGameOverScreen();
         });

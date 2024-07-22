@@ -58,9 +58,11 @@ public class PlayerController : MonoBehaviour, IPlayer
 
         movementModule.SetRotation(upDot);
     }
-    public void Setup(IGameController gameController)
+    public void Setup(IGameController gameController, SkinData[] skinData)
     {
         this.gameController = gameController;
+
+        animatorModule.Setup(skinData);
     }
     private void SetTutorial()
     {

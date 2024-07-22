@@ -10,15 +10,13 @@ public class Stage : MonoBehaviour, IStage, IStartable
     [SerializeField] public MonoBehaviour floorObject;
     [SerializeField] private Transform spawnPoint;
 
-    private Obstacle obstaclePrefab;
-    private ScreenflashData screenflashData;
+    private StageData stageData;
     private bool isRunning;
     private GenericPool<Obstacle> obstaclePool;
     private List<Obstacle> runningObstacles;
     private float lastInstantiated;
     private ITexturable background;
     private ITexturable floor;
-    private float spawnTimeInterval;
 
     private void Awake()
     {
@@ -36,7 +34,7 @@ public class Stage : MonoBehaviour, IStage, IStartable
         if (!isRunning)
             return;
 
-        if (Time.time < lastInstantiated + spawnTimeInterval)
+        if (Time.time < lastInstantiated + stageData.spawnTimeInterval)
             return;
 
         var obstacle = obstaclePool.Get();
@@ -54,14 +52,12 @@ public class Stage : MonoBehaviour, IStage, IStartable
     }
     public void Setup(StageData stageData)
     {
-        spawnTimeInterval = stageData.spawnTimeInterval;
-        obstaclePrefab = stageData.obstaclePrefab;
-        screenflashData = stageData.screenflashData;
+        this.stageData = stageData;
 
         background.SetTexture(stageData.backgroundTexture);
         floor.SetTexture(stageData.floorTexture);
 
-        obstaclePool = new GenericPool<Obstacle>(obstaclePrefab);
+        obstaclePool = new GenericPool<Obstacle>(stageData.obstaclePrefab);
     }
     public void Run()
     {
@@ -86,8 +82,8 @@ public class Stage : MonoBehaviour, IStage, IStartable
         obstaclePool.Reset();
     }
 
-    public ScreenflashData GetScreenflashData()
+    public StageData GetStageData()
     {
-        return screenflashData;
+        return stageData;
     }
 }
