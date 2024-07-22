@@ -1,4 +1,4 @@
-public class ScoreWindowController : WindowController<IScoreWindowWindow>, IScoreWindowController
+public class ScoreWindowController : WindowController<IScoreWindow>, IScoreWindowController
 {
     public void SetPoint(int value)
     {

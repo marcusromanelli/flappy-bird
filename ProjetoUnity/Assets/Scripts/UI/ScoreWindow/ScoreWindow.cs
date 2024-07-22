@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class ScoreWindow : WindowPanel, IScoreWindowWindow
+public class ScoreWindow : WindowPanel, IScoreWindow
 {
     [SerializeField] private TMP_Text pointLabel;
     public void SetPoint(int value)
