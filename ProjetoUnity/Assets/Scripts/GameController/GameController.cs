@@ -1,4 +1,5 @@
 using AYellowpaper;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -30,8 +31,14 @@ public class GameController : MonoBehaviour, IGameController
     [SerializeField] private MonoBehaviour screenflasherObject;
     [RequireInterface(typeof(IStartWindowController))]
     [SerializeField] private MonoBehaviour startObject;
-
     [SerializeField] private GameObject startButton;
+
+#if UNITY_EDITOR
+    [Header("Debug")]
+    [SerializeField] private bool OverrideScore;
+    [SerializeField] private int OverridenScore = 150;
+#endif
+
 
     private IStage stage;
     private IPlayer player;
@@ -107,6 +114,11 @@ public class GameController : MonoBehaviour, IGameController
     }
     private void ShowGameOverScreen()
     {
+#if UNITY_EDITOR
+        if (OverrideScore)
+            currentScore = OverridenScore;
+#endif
+
         Sprite medal = null;
         var medalData = scoreController.GetMedal(currentScore);
 

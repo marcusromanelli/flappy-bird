@@ -468,6 +468,8 @@ MonoBehaviour:
   scoreControllerObject: {fileID: 446106708}
   screenflasherObject: {fileID: 1104493924}
   startObject: {fileID: 585877130}
+  OverrideScore: 1
+  OverridenScore: 150
   startButton: {fileID: 585877123}
 --- !u!4 &446106707
 Transform:
