@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Obstacle : MonoBehaviour, IPoolable, IStartable, IObstacle
+public class Obstacle : MonoBehaviour, IObstacle, IStartable
 {
     [SerializeField] public UnityEvent<Obstacle> onLeftScreen;
     [SerializeField] private float spaceBetweenPipes;

@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(CanvasGroup))]
 public abstract class WindowPanel : MonoBehaviour, IWindow
 {
-    CanvasGroup canvasGroup;
+    protected CanvasGroup canvasGroup;
 
     protected virtual void Awake()
     {

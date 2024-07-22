@@ -9,7 +9,7 @@ public abstract class WindowController<T> : MonoBehaviour where T: IWindow
 
     protected T window;
 
-    private void Awake()
+    protected void Awake()
     {
         window = windowObject.GetComponent<T>();
     }

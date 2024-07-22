@@ -1,12 +1,14 @@
 using AYellowpaper;
-using System.Runtime.CompilerServices;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class GameController : MonoBehaviour, IGameController
 {
+    public UnityEvent OnPlayerDie;
+    public UnityEvent OnGameStart;
+    public UnityEvent OnPlayerScore;
+    
     enum GameState
     {
         Tutorial,
@@ -14,7 +16,8 @@ public class GameController : MonoBehaviour, IGameController
         Death
     }
     [RequireInterface(typeof(IStage))]
-    [SerializeField] private MonoBehaviour[] stagePrefabs;
+    [SerializeField] private MonoBehaviour stageObject;
+    [SerializeField] private StageData[] stagePrefabs;
     [RequireInterface(typeof(IPlayer))]
     [SerializeField] private MonoBehaviour playerObject;
     [RequireInterface(typeof(IScoreWindowController))]
@@ -23,6 +26,8 @@ public class GameController : MonoBehaviour, IGameController
     [SerializeField] private MonoBehaviour gameOverControllerObject;
     [RequireInterface(typeof(IScoreController))]
     [SerializeField] private MonoBehaviour scoreControllerObject;
+    [RequireInterface(typeof(IScreenflasherController))]
+    [SerializeField] private MonoBehaviour screenflasherObject;
 
     [SerializeField] private GameObject startButton;
 
@@ -31,6 +36,7 @@ public class GameController : MonoBehaviour, IGameController
     private IScoreWindowController scoreWindowController;
     private IGameOverController gameOverController;
     private IScoreController scoreController;
+    private IScreenflasherController screenflasherController;
     private int currentScore;
     private GameState gameState;
     private void Awake()
@@ -39,6 +45,8 @@ public class GameController : MonoBehaviour, IGameController
         scoreWindowController = (IScoreWindowController)pointCounterControllerObject;
         gameOverController = (IGameOverController)gameOverControllerObject;
         scoreController = (IScoreController)scoreControllerObject;
+        screenflasherController = (IScreenflasherController)screenflasherObject;
+        stage = (IStage)stageObject;
     }
     private void Start()
     {
@@ -59,7 +67,7 @@ public class GameController : MonoBehaviour, IGameController
         player.Setup(this);
     }
 
-    MonoBehaviour SelectRandomStage()
+    StageData SelectRandomStage()
     {
         return stagePrefabs[Random.Range(0, stagePrefabs.Length)];
     }
@@ -67,9 +75,9 @@ public class GameController : MonoBehaviour, IGameController
     {
         var randomStage = SelectRandomStage();
 
-        stage = Instantiate(randomStage, transform).GetComponent<IStage>();
+        var stageData = Instantiate(randomStage, transform);
 
-        stage.Setup();
+        stage.Setup(stageData);
     }
     private void SetScore(int value)
     {
@@ -83,6 +91,13 @@ public class GameController : MonoBehaviour, IGameController
     private void ResetGame()
     {
         SceneManager.LoadScene(0);
+    }
+    private void ShowScreenFlash()
+    {
+        var data = stage.GetScreenflashData();
+        screenflasherController.Show(data.color, data.time, () => {
+            ShowGameOverScreen();
+        });
     }
     private void ShowGameOverScreen()
     {
@@ -125,6 +140,6 @@ public class GameController : MonoBehaviour, IGameController
 
         gameState = GameState.Death;
 
-        ShowGameOverScreen();
+        ShowScreenFlash();
     }
 }

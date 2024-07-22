@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour, IPlayer
     {
         Init(); //Puting these here because Disabled can be set in editor
 
-        rigidbody.bodyType = DisableCollision ? RigidbodyType2D.Kinematic : RigidbodyType2D.Dynamic;
+        rigidbody.bodyType = DisableInput ? RigidbodyType2D.Kinematic : RigidbodyType2D.Dynamic;
     }
     private void UpdateRotation()
     {

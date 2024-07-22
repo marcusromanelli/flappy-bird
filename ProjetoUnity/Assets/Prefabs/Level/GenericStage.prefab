@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 5271541053349671856}
   - component: {fileID: 4798147306603692205}
   m_Layer: 0
-  m_Name: DayLevel
+  m_Name: GenericStage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

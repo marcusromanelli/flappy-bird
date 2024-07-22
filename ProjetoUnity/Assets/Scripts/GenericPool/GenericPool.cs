@@ -20,6 +20,13 @@ public class GenericPool<T> where T: MonoBehaviour, IPoolable
         m_Pool.Release(obj);
     }
 
+    public void Reset()
+    {
+        m_Pool.Clear();
+        m_Pool = null;
+        m_Prefab = null;
+    }
+
     T _create()
     {
         var go = GameObject.Instantiate(m_Prefab);

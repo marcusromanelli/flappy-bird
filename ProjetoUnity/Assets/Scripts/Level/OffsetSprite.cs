@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Renderer))]
-public class OffsetSprite : MonoBehaviour, IStartable
+public class OffsetSprite : MonoBehaviour, ITexturable, IStartable
 {
     [SerializeField] private float speed;
 
@@ -14,6 +14,11 @@ public class OffsetSprite : MonoBehaviour, IStartable
     public void Run()
     {
         isRunning = true;
+    }
+
+    public void SetTexture(Texture texture)
+    {
+        renderer.sharedMaterial.SetTexture("_MainTex", texture);
     }
 
     public void Stop()
