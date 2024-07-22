@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Silver
   m_EditorClassIdentifier: 
   medalSprite: {fileID: 1915066726, guid: aef0d2ff066e68647a7a42fdf88cfff0, type: 3}
-  requiredPoints: 40
+  requiredPoints: 20

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Gold
   m_EditorClassIdentifier: 
   medalSprite: {fileID: 1477710465, guid: aef0d2ff066e68647a7a42fdf88cfff0, type: 3}
-  requiredPoints: 70
+  requiredPoints: 40
