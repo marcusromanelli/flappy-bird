@@ -24,7 +24,7 @@ public class GameOverController : WindowController<IGameOverWindow>, IGameOverCo
     private IEnumerator CountScore(Sprite medal, int currentScore)
     {
         var i = 0;
-        var increaseBy = currentScore / 5;
+        var increaseBy = Mathf.CeilToInt(currentScore / 5f);
         while(i <= currentScore)
         {
             window.SetCurrentScore(i);
