@@ -28,6 +28,8 @@ public class GameController : MonoBehaviour, IGameController
     [SerializeField] private MonoBehaviour scoreControllerObject;
     [RequireInterface(typeof(IScreenflasherController))]
     [SerializeField] private MonoBehaviour screenflasherObject;
+    [RequireInterface(typeof(IStartWindowController))]
+    [SerializeField] private MonoBehaviour startObject;
 
     [SerializeField] private GameObject startButton;
 
@@ -37,6 +39,7 @@ public class GameController : MonoBehaviour, IGameController
     private IGameOverController gameOverController;
     private IScoreController scoreController;
     private IScreenflasherController screenflasherController;
+    private IStartWindowController startController;
     private int currentScore;
     private GameState gameState;
     private void Awake()
@@ -46,6 +49,7 @@ public class GameController : MonoBehaviour, IGameController
         gameOverController = (IGameOverController)gameOverControllerObject;
         scoreController = (IScoreController)scoreControllerObject;
         screenflasherController = (IScreenflasherController)screenflasherObject;
+        startController = (IStartWindowController)startObject;
         stage = (IStage)stageObject;
     }
     private void Start()
@@ -57,6 +61,8 @@ public class GameController : MonoBehaviour, IGameController
         InitializeScore();
 
         gameState = GameState.Tutorial;
+
+        startController.Show();
     }
     private void InitializeScore()
     {
@@ -128,6 +134,8 @@ public class GameController : MonoBehaviour, IGameController
         player.Run();
 
         gameState = GameState.Playing;
+
+        startController.Hide();
     }
     public void AddScore()
     {
