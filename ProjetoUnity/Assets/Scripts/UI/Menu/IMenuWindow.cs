@@ -2,5 +2,5 @@ using System;
 
 public interface IMenuWindow : IWindow
 {
-    public void Setup(Action OnClickPlay);
+    public void Setup(Action OnClickPlay, Action OnClickLeaderboards);
 }

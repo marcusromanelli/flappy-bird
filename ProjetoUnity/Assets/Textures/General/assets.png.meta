@@ -127,7 +127,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1
-        y: 59
+        y: 43
         width: 15
         height: 14
       alignment: 0
@@ -148,7 +148,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 19
-        y: 52
+        y: 36
         width: 22
         height: 22
       alignment: 0
@@ -169,7 +169,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 43
-        y: 52
+        y: 36
         width: 22
         height: 22
       alignment: 0
@@ -190,7 +190,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 69
-        y: 52
+        y: 36
         width: 22
         height: 22
       alignment: 0
@@ -211,7 +211,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 94
-        y: 52
+        y: 37
         width: 22
         height: 22
       alignment: 0
@@ -232,7 +232,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 121
-        y: 51
+        y: 35
         width: 22
         height: 23
       alignment: 0
@@ -253,11 +253,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 2
-        y: 42
+        y: 26
         width: 13
         height: 14
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.49999994, y: 0.4745963}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -274,7 +274,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 22
-        y: 42
+        y: 26
         width: 16
         height: 7
       alignment: 0
@@ -296,11 +296,11 @@ TextureImporter:
         serializedVersion: 2
         x: 42
         y: 18
-        width: 52
-        height: 29
+        width: 13
+        height: 13
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 5, y: 5, z: 5, w: 6}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -316,7 +316,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 100
-        y: 34
+        y: 18
         width: 40
         height: 14
       alignment: 0
@@ -337,7 +337,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 100
-        y: 17
+        y: 1
         width: 40
         height: 14
       alignment: 0
@@ -358,7 +358,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1
-        y: 3
+        y: 2
         width: 51
         height: 14
       alignment: 0
@@ -374,6 +374,69 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: button_exit
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 2
+        width: 33
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f44a7f0892dea424ab28c6c834473394
+      internalID: -516557445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: play_ucon
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 18
+        width: 7
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c07b06475fd16bc41890f1643e5fc68a
+      internalID: -726760281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: leaderboards_icon
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 17
+        width: 27
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54c9198fa38d88d41b842b857c3be1f4
+      internalID: 2043358897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -385,6 +448,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      button_exit: -516557445
+      leaderboards_icon: 2043358897
       medal_bronze: -966023974
       medal_gold: 1477710465
       medal_platinum: -487604140
@@ -397,6 +462,7 @@ TextureImporter:
       new_marker: 716495910
       ok_button: -390535449
       play_button: 862724709
+      play_ucon: -726760281
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

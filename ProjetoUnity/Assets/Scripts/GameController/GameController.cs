@@ -84,7 +84,7 @@ public class GameController : MonoBehaviour, IGameController
     }
     private void InitializeControllers()
     {
-        menuController.Setup(HandleOnClickPlay);
+        menuController.Setup(HandleOnClickPlay, HandleOnClickLeaderboards);
 
         menuController.Show();
 
@@ -118,6 +118,10 @@ public class GameController : MonoBehaviour, IGameController
         menuController.Hide();
 
         startController.Show();
+    }
+    private void HandleOnClickLeaderboards()
+    {
+
     }
     public void OnFlapInput(InputAction.CallbackContext context)
     {
