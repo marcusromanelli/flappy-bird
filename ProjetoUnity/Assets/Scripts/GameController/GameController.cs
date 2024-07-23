@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour, IGameController
 {    
     enum GameState
     {
+        Menu,
         Tutorial,
         Playing,
         Death
@@ -29,6 +30,8 @@ public class GameController : MonoBehaviour, IGameController
     [SerializeField] private MonoBehaviour startObject;
     [RequireInterface(typeof(ISoundController))]
     [SerializeField] private MonoBehaviour soundObject;
+    [RequireInterface(typeof(IMenuWindowController))]
+    [SerializeField] private MonoBehaviour menuObject;
     [SerializeField] private GameObject startButton;
 
 #if UNITY_EDITOR
@@ -46,6 +49,7 @@ public class GameController : MonoBehaviour, IGameController
     private IScreenflasherController screenflasherController;
     private IStartWindowController startController;
     private ISoundController soundController;
+    private IMenuWindowController menuController;
     private int currentScore;
     private GameState gameState;
     private void Awake()
@@ -57,17 +61,32 @@ public class GameController : MonoBehaviour, IGameController
         screenflasherController = (IScreenflasherController)screenflasherObject;
         startController = (IStartWindowController)startObject;
         soundController = (ISoundController)soundObject;
+        menuController = (IMenuWindowController)menuObject;
         stage = (IStage)stageObject;
     }
     private void Start()
     {
+        InitializeControllers();
+
         InstantiateStage();
 
         InitializePlayer();
 
         InitializeScore();
 
+        gameState = GameState.Menu;
+    }
+    private void InitializeControllers()
+    {
+        menuController.Setup(HandleOnClickPlay);
+
+        menuController.Show();
+    }
+    private void HandleOnClickPlay()
+    {
         gameState = GameState.Tutorial;
+
+        menuController.Hide();
 
         startController.Show();
     }

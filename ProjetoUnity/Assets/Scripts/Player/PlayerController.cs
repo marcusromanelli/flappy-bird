@@ -60,6 +60,8 @@ public class PlayerController : MonoBehaviour, IPlayer
     }
     public void Setup(IGameController gameController, SkinData[] skinData)
     {
+        Init();
+
         this.gameController = gameController;
 
         animatorModule.Setup(skinData);

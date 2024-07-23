@@ -10,6 +10,10 @@ public class PlayerAnimation : MonoBehaviour, IAnimator
 
     private void Awake()
     {
+        Init();
+    }
+    private void Init()
+    {
         animator = GetComponent<Animator>();
     }
     private void SelectRandomSkin()
@@ -22,6 +26,8 @@ public class PlayerAnimation : MonoBehaviour, IAnimator
     }
     public void Setup(SkinData[] skinData)
     {
+        Init();
+
         availableSkins = skinData;
 
         SelectRandomSkin();
