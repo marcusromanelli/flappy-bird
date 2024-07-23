@@ -47,10 +47,7 @@ public class Stage : MonoBehaviour, IStage, IStartable
             var distance = Vector3.Distance(normalizedObstablePosition, spawnPoint.transform.position);
 
             if (distance < stageData.spawnDistance)
-            {
-                Debug.Log("Obstacle " + lastInstantiatedObject.name + " is on position " + lastInstantiatedObject.transform.position + ", " + distance + " units away from spawn " + spawnPoint.transform.position + ". The required is " + stageData.spawnDistance);
                 return;
-            }
         }
 
         var obstacle = obstaclePool.Get();
@@ -59,8 +56,6 @@ public class Stage : MonoBehaviour, IStage, IStartable
         runningObstacles.Add(obstacle);
         obstacle.onLeftScreen.AddListener(OnObstacleLeftScreen);
         obstacle.name = number.ToString();
-
-        Debug.Log("Creating obstable " + obstacle.name + " at position " + obstacle.transform.position);
 
         lastInstantiatedObject = obstacle;
 
