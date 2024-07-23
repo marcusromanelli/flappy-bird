@@ -48,4 +48,8 @@ public class OffsetSprite : MonoBehaviour, ITexturable, IStartable
 
         renderer.sharedMaterial.SetTextureOffset("_MainTex", offset);
     }
+    public void TogglePause(bool pause)
+    {
+        isRunning = !pause;
+    }
 }

@@ -127,7 +127,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1
-        y: 44
+        y: 59
         width: 15
         height: 14
       alignment: 0
@@ -148,7 +148,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 19
-        y: 37
+        y: 52
         width: 22
         height: 22
       alignment: 0
@@ -169,7 +169,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 43
-        y: 37
+        y: 52
         width: 22
         height: 22
       alignment: 0
@@ -190,7 +190,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 69
-        y: 37
+        y: 52
         width: 22
         height: 22
       alignment: 0
@@ -211,7 +211,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 94
-        y: 37
+        y: 52
         width: 22
         height: 22
       alignment: 0
@@ -232,7 +232,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 121
-        y: 36
+        y: 51
         width: 22
         height: 23
       alignment: 0
@@ -253,7 +253,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 2
-        y: 27
+        y: 42
         width: 13
         height: 14
       alignment: 0
@@ -274,7 +274,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 22
-        y: 27
+        y: 42
         width: 16
         height: 7
       alignment: 0
@@ -295,11 +295,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 42
-        y: 3
+        y: 18
         width: 52
         height: 29
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -316,11 +316,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 100
-        y: 19
+        y: 34
         width: 40
         height: 14
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -337,11 +337,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 100
-        y: 2
+        y: 17
         width: 40
         height: 14
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -349,6 +349,27 @@ TextureImporter:
       bones: []
       spriteID: fa063b541b9c3074c80450b19077cbb6
       internalID: -390535449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: menu_continue
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 3
+        width: 51
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 365cc0755644b584a84e5f8d50337541
+      internalID: -1012988107
       vertices: []
       indices: 
       edges: []
@@ -371,6 +392,7 @@ TextureImporter:
       medal_silver: 1915066726
       menu_bg: -488889189
       menu_button: -80810922
+      menu_continue: -1012988107
       menu_pause: -172843975
       new_marker: 716495910
       ok_button: -390535449

@@ -106,4 +106,8 @@ public class Obstacle : MonoBehaviour, IObstacle, IStartable
         onLeftScreen.RemoveAllListeners();
         isRunning = false;
     }
+    public void TogglePause(bool pause)
+    {
+        isRunning = !pause;
+    }
 }

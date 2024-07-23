@@ -104,19 +104,13 @@ public class PlayerController : MonoBehaviour, IPlayer
     {
         gameController.Death();
     }
-    public void OnFlapInput(InputAction.CallbackContext context)
+    public void Flap()
     {
-        if (!context.performed)
-            return;
-
-        gameController.TouchScreen();
-
         if (!isRunning)
             return;
 
         movementModule.Flap();
     }
-    [Button("Enable")]
     public void Run()
     {
         isRunning = true;
@@ -129,5 +123,15 @@ public class PlayerController : MonoBehaviour, IPlayer
     public void OnCollisionEnter2D(Collision2D collision)
     {
         HandleCollision(collision);
+    }
+    public void TogglePause(bool pause)
+    {
+        isRunning = !pause;
+        SetPause(pause);
+    }
+
+    private void SetPause(bool isPaused)
+    {
+        rigidbody.simulated = !isPaused;
     }
 }

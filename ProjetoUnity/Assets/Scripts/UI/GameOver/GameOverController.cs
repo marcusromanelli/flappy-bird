@@ -4,21 +4,15 @@ using UnityEngine;
 
 public class GameOverController : WindowController<IGameOverWindow>, IGameOverController
 {
-    private Action onClickRestart;
     private int highscore;
     public void Setup(int currentScore, int highscore, Sprite medal, Action onClickRestart)
     {
-        this.onClickRestart = onClickRestart;
         this.highscore = highscore;
 
-        window.Setup(OnClickRestart);
+        window.Setup(onClickRestart);
         window.SetMaxScore(highscore);
 
         StartCoroutine(CountScore(medal, currentScore));
-    }
-    private void OnClickRestart()
-    {
-        onClickRestart?.Invoke();
     }
     private IEnumerator CountScore(Sprite medal, int currentScore)
     {

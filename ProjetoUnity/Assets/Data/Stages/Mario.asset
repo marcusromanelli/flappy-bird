@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b33df6137b649d4bb7673538a3f0283, type: 3}
   m_Name: Mario
   m_EditorClassIdentifier: 
-  spawnTimeInterval: 1
+  spawnDistance: 3
   backgroundTexture: {fileID: 2800000, guid: ae5bb3b6f99bb464e8dd1a525d5a2421, type: 3}
   floorTexture: {fileID: 2800000, guid: 94a33a5d02788dd42981dd7bad8b4554, type: 3}
   obstaclePrefab: {fileID: 3114220778665099574, guid: dff95a2c23643644bb688440b535d235, type: 3}

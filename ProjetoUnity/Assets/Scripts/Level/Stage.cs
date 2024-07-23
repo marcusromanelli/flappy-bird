@@ -14,9 +14,12 @@ public class Stage : MonoBehaviour, IStage, IStartable
     private bool isRunning;
     private GenericPool<Obstacle> obstaclePool;
     private List<Obstacle> runningObstacles;
-    private float lastInstantiated;
+    private Obstacle lastInstantiatedObject;
     private ITexturable background;
     private ITexturable floor;
+    private float lastPauseTime;
+    private float totalPausedTime;
+    private Vector3 distanceCalculation;
 
     private void Awake()
     {
@@ -25,25 +28,47 @@ public class Stage : MonoBehaviour, IStage, IStartable
         background = (ITexturable)backgroundObject;
         floor = (ITexturable)floorObject;
     }
-    private void Update()
+    private void FixedUpdate()
     {
         CheckInstantiation();
     }
+    int number = 0;
     private void CheckInstantiation()
     {
         if (!isRunning)
             return;
 
-        if (Time.time < lastInstantiated + stageData.spawnTimeInterval)
-            return;
+        var time = GetTime();
+
+        if (lastInstantiatedObject != null)
+        {
+            var normalizedObstablePosition = new Vector3(lastInstantiatedObject.transform.position.x, spawnPoint.transform.position.y, lastInstantiatedObject.transform.position.z);
+
+            var distance = Vector3.Distance(normalizedObstablePosition, spawnPoint.transform.position);
+
+            if (distance < stageData.spawnDistance)
+            {
+                Debug.Log("Obstacle " + lastInstantiatedObject.name + " is on position " + lastInstantiatedObject.transform.position + ", " + distance + " units away from spawn " + spawnPoint.transform.position + ". The required is " + stageData.spawnDistance);
+                return;
+            }
+        }
 
         var obstacle = obstaclePool.Get();
         obstacle.Setup(spawnPoint.position);
 
         runningObstacles.Add(obstacle);
         obstacle.onLeftScreen.AddListener(OnObstacleLeftScreen);
+        obstacle.name = number.ToString();
 
-        lastInstantiated = Time.time;
+        Debug.Log("Creating obstable " + obstacle.name + " at position " + obstacle.transform.position);
+
+        lastInstantiatedObject = obstacle;
+
+        number++;
+    }
+    private float GetTime()
+    {
+        return Time.time;
     }
     private void OnObstacleLeftScreen(Obstacle obstacle)
     {
@@ -85,5 +110,24 @@ public class Stage : MonoBehaviour, IStage, IStartable
     public StageData GetStageData()
     {
         return stageData;
+    }
+
+    public void TogglePause(bool pause)
+    {
+        var time = GetTime();
+        if (pause)
+            lastPauseTime = time;
+        else
+            totalPausedTime = time - lastPauseTime;
+
+        isRunning = !pause;
+
+        foreach(var obstacle in runningObstacles)
+        {
+            obstacle.TogglePause(pause);
+        }
+
+        background.TogglePause(pause);
+        floor.TogglePause(pause);
     }
 }

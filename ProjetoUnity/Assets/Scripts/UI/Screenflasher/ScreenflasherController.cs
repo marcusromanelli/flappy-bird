@@ -28,8 +28,6 @@ public class ScreenflasherController : WindowController<ScreenflasherWindow>, IS
         }
 
         var sequence = DOTween.Sequence();
-        var currentFloat = 0f;
-
 
         sequence.Append(
         DOTween.To(x => { window.SetOpacity(x); }, 0f, 1f, time / 2f)

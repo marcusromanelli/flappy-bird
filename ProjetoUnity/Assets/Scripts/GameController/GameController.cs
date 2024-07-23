@@ -1,7 +1,9 @@
 using AYellowpaper;
 using NaughtyAttributes;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour, IGameController
@@ -32,6 +34,8 @@ public class GameController : MonoBehaviour, IGameController
     [SerializeField] private MonoBehaviour soundObject;
     [RequireInterface(typeof(IMenuWindowController))]
     [SerializeField] private MonoBehaviour menuObject;
+    [RequireInterface(typeof(IPauseWindowController))]
+    [SerializeField] private MonoBehaviour pauseObject;
     [SerializeField] private GameObject startButton;
 
 #if UNITY_EDITOR
@@ -50,6 +54,7 @@ public class GameController : MonoBehaviour, IGameController
     private IStartWindowController startController;
     private ISoundController soundController;
     private IMenuWindowController menuController;
+    private IPauseWindowController pauseController;
     private int currentScore;
     private GameState gameState;
     private void Awake()
@@ -62,6 +67,7 @@ public class GameController : MonoBehaviour, IGameController
         startController = (IStartWindowController)startObject;
         soundController = (ISoundController)soundObject;
         menuController = (IMenuWindowController)menuObject;
+        pauseController = (IPauseWindowController)pauseObject;
         stage = (IStage)stageObject;
     }
     private void Start()
@@ -81,6 +87,29 @@ public class GameController : MonoBehaviour, IGameController
         menuController.Setup(HandleOnClickPlay);
 
         menuController.Show();
+
+        scoreWindowController.Setup(HandleOnClickPause);
+
+        pauseController.Setup(HandleClickMenu, HandleClickContinue);
+    }
+    public void HandleOnClickPause()
+    {
+        if (gameState != GameState.Playing) 
+            return;
+
+        pauseController.Show();
+        stage.TogglePause(true);
+        player.TogglePause(true);
+    }
+    private void HandleClickMenu()
+    {
+        ResetGame();
+    }
+    private void HandleClickContinue()
+    {
+        pauseController.Hide();
+        stage.TogglePause(false);
+        player.TogglePause(false);
     }
     private void HandleOnClickPlay()
     {
@@ -89,6 +118,15 @@ public class GameController : MonoBehaviour, IGameController
         menuController.Hide();
 
         startController.Show();
+    }
+    public void OnFlapInput(InputAction.CallbackContext context)
+    {
+        if (!context.performed)
+            return;
+
+        TouchScreen();
+
+        player.Flap();
     }
     private void InitializeScore()
     {
@@ -150,7 +188,6 @@ public class GameController : MonoBehaviour, IGameController
 
         gameOverController.Setup(currentScore, scoreController.GetHighestScore(), medal, ResetGame);
         gameOverController.Show();
-
     }
     public void TouchScreen()
     {
@@ -169,6 +206,8 @@ public class GameController : MonoBehaviour, IGameController
     }
     public void StartGame()
     {
+        scoreWindowController.Show();
+
         startButton.gameObject.SetActive(false);
         stage.Run();
 

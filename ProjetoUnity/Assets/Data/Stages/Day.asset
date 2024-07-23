@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b33df6137b649d4bb7673538a3f0283, type: 3}
   m_Name: Day
   m_EditorClassIdentifier: 
-  spawnTimeInterval: 1
+  spawnDistance: 3
   backgroundTexture: {fileID: 2800000, guid: 03353fedcc67e7b48a283dcbd71f09a1, type: 3}
   floorTexture: {fileID: 2800000, guid: 275a664a81ac871408a31021508e7430, type: 3}
   obstaclePrefab: {fileID: 3114220778665099574, guid: 6eebbeb7ac8b79e4eadf787e4d6ca7b1, type: 3}
