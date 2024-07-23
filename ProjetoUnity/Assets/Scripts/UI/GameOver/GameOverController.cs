@@ -10,7 +10,9 @@ public class GameOverController : WindowController<IGameOverWindow>, IGameOverCo
         this.highscore = highscore;
 
         window.Setup(onClickRestart);
-        window.SetMaxScore(highscore);
+
+        if (currentScore < highscore)
+            window.SetMaxScore(highscore);
 
         StartCoroutine(CountScore(medal, currentScore));
     }
@@ -21,16 +23,20 @@ public class GameOverController : WindowController<IGameOverWindow>, IGameOverCo
 
         yield return new WaitForSeconds(1);
 
-        while(i <= currentScore)
+        while (i <= currentScore)
         {
             window.SetCurrentScore(i);
-            i+= increaseBy;
+            i += increaseBy;
             yield return new WaitForSeconds(0.1f);
         }
 
         window.SetMedal(medal);
 
         if (currentScore >= highscore)
+        {
             window.SetNewScore();
+
+            window.SetMaxScore(currentScore);
+        }
     }
 }

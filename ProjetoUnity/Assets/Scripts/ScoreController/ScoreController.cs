@@ -1,16 +1,21 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ScoreController : MonoBehaviour, IScoreController
 {
     [SerializeField] MedalData[] medals;
 
+    private const int maxNumberHighscores = 3;
 
-    private const string storeKey = "HighestScore";
-    private int highestScore;
+    private IScoreStorage scoreStorage;
+    private List<int> highestScores;
 
     private void Awake()
     {
-        highestScore = PlayerPrefs.GetInt(storeKey,0);
+        scoreStorage = GetComponent<IScoreStorage>();
+
+        LoadStoredScores();
     }
     public MedalData GetMedal(int score)
     {
@@ -27,14 +32,28 @@ public class ScoreController : MonoBehaviour, IScoreController
 
     public int GetHighestScore()
     {
-        return highestScore;
+        return highestScores.Count == 0 ? 0 : highestScores[0];
     }
 
     public void Store(int score)
     {
-        if (score > highestScore) 
-            highestScore = score;
+        highestScores.Add(score);
+        highestScores = highestScores.OrderByDescending(a => a).Take(3).ToList();
 
-        PlayerPrefs.SetInt(storeKey, highestScore);
+        scoreStorage.Save(highestScores);
     }
+
+    private void LoadStoredScores()
+    {
+        highestScores = scoreStorage.Load();
+
+        if (highestScores == null)
+            highestScores = new List<int>();
+    }
+
+    public List<int> GetHighscores()
+    {
+        return highestScores;
+    }
+
 }

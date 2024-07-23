@@ -36,6 +36,8 @@ public class GameController : MonoBehaviour, IGameController
     [SerializeField] private MonoBehaviour menuObject;
     [RequireInterface(typeof(IPauseWindowController))]
     [SerializeField] private MonoBehaviour pauseObject;
+    [RequireInterface(typeof(ILeaderboardsController))]
+    [SerializeField] private MonoBehaviour leaderboardObject;
     [SerializeField] private GameObject startButton;
 
 #if UNITY_EDITOR
@@ -55,6 +57,7 @@ public class GameController : MonoBehaviour, IGameController
     private ISoundController soundController;
     private IMenuWindowController menuController;
     private IPauseWindowController pauseController;
+    private ILeaderboardsController leaderboardsController;
     private int currentScore;
     private GameState gameState;
     private void Awake()
@@ -68,6 +71,7 @@ public class GameController : MonoBehaviour, IGameController
         soundController = (ISoundController)soundObject;
         menuController = (IMenuWindowController)menuObject;
         pauseController = (IPauseWindowController)pauseObject;
+        leaderboardsController = (ILeaderboardsController)leaderboardObject;
         stage = (IStage)stageObject;
     }
     private void Start()
@@ -121,7 +125,14 @@ public class GameController : MonoBehaviour, IGameController
     }
     private void HandleOnClickLeaderboards()
     {
+        var highscores = scoreController.GetHighscores();
 
+        leaderboardsController.Setup(highscores, HandleClickCloseLeaderboards);
+        leaderboardsController.Show();
+    }
+    private void HandleClickCloseLeaderboards()
+    {
+        leaderboardsController.Hide();
     }
     public void OnFlapInput(InputAction.CallbackContext context)
     {
