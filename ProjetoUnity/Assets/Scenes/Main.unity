@@ -1091,7 +1091,7 @@ MonoBehaviour:
   pauseObject: {fileID: 2097633466}
   leaderboardObject: {fileID: 245226348}
   startButton: {fileID: 585877123}
-  OverrideScore: 1
+  OverrideScore: 0
   OverridenScore: 10
 --- !u!4 &446106707
 Transform:

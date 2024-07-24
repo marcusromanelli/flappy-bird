@@ -1,0 +1,7 @@
+Packages:
+Newtonsoft JSON - https://docs.unity3d.com/Packages/com.unity.nuget.newtonsoft-json@2.0/manual/index.html
+
+Plugins:
+NaughtyAttributes - Asset Store - Free - https://assetstore.unity.com/packages/tools/utilities/naughtyattributes-129996
+DOTween - Asset Store - Free - https://assetstore.unity.com/packages/tools/animation/dotween-hotween-v2-27676
+Serialize Interfaces! - Asset Store - Free - https://assetstore.unity.com/packages/tools/utilities/serialize-interfaces-187505
