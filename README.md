@@ -1,5 +1,5 @@
 # FlappyBirdTemplate
 
-Implementatino details are explained in the video below (in portuguese, with english subtitles provided by YouTube)
+Implementation details are explained in the video below (in portuguese, with english subtitles provided by YouTube)
 
 https://youtu.be/jXBN9o4zTHg
